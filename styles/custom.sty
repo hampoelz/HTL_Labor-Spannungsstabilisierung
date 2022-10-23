@@ -1,3 +1,9 @@
 % ========================================
 %      Add custom packages and styles     
 % ========================================
+
+\newcommand{\invisiblesection}[1]{%
+  \refstepcounter{section}%
+  \addcontentsline{toc}{section}{\protect\numberline{\thesection}#1}%
+  \sectionmark{#1}%
+}
