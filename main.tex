@@ -24,7 +24,7 @@
 
 Es soll eine einfache Spannungsstabilisierung/steuerung mit einer Kollektorschaltung dimensioniert und aufgebaut werden.
 Des Weiteren soll als Vergleich eine Spannungsstabilisierung/regelung mit einem Operationsverstärker dimensioniert und aufgebaut werden.
-Mit Simulationen sollen die Funktionsweise der Schaltungen überprüft werden.
+Mit Simulationen sollen die Funktionsweisen der Schaltungen überprüft werden.
 
 \begin{sagesilent}
     I_a_max = 0.05
@@ -39,6 +39,8 @@ Mit Simulationen sollen die Funktionsweise der Schaltungen überprüft werden.
 Allgemeine Angaben: $I_{a_{max}} = \var{I_a_max}A$, $I_{ZD} = \var{I_ZD}A$
 
 Datenblatt: $U_{ZD} = \var{U_ZD}V$, $U_{ZD} = \var{U_ZD}V$, $U_{ZD_{max}} = \var{U_ZD_max}V$, $U_{BE} = \var{U_BE}V$, $U_{O_{OPV}} = \var{U_O_OPV}V$
+
+\vspace{1cm}
 
 \section{Spannungsstabilisierung mit Kollektorschaltung}
 
@@ -68,7 +70,7 @@ Schaltungsspezifische Angaben: $U_{e0} = \var{U_e0}V$
         to[R=$R_{V}$,*-*] ++(0,-2) coordinate (aux2)
         to[zD=$ZD$,name=ZD,i>^,invert,*-*] (aux2 |- in-)
 
-        (aux2) ++(2,0) node[npn] (T) {T}
+        (aux2) ++(2,0) node[npn] (T) {$T$}
         (T.E) coordinate (out+)
 
         (aux2) to[short,name=I_B,i] (T.B)
@@ -106,6 +108,8 @@ Die Eingangsspannung $U_{e0}$ fällt somit an der Z-Diode $ZD$ sowie am Vorwider
     U_{R_{V}} &= \var{U_e0} - \var{U_ZD} \\
     U_{R_{V}} &= \var{U_R_V}V
 \end{align*}
+
+\pagebreak
 
 Der Strom, welcher durch den Vorwiderstand $R_{V}$ fließt, setzt sich aus dem Strom $I_{ZD}$ der Z-Diode und dem Basis-Strom $I_{B}$ des Transistors zusammen.
 Der Basis-Strom $I_{ZD}$ ist jedoch meist so klein, dass dieser vernachlässigt werden kann.
@@ -161,6 +165,8 @@ Nach dem Ohmschen Gesetz ergibt sich schließlich der minimale Lastwiderstand $R
     \caption{Ausgangskennlinie \textbf{$U_{a} = f(R_L)$} der Simulation}
     \label{fig:simulation1}
 \end{figure}
+
+\vspace{-1em}
 
 Die Simulation konnte nicht mit der gleichen Z-Diode wie bei der Messung durchgeführt werden.
 Daher weicht der Wertebereich in der Ausgangskennlinie der Simulation \textit{(Abb. \ref{fig:simulation1})} etwas von dem der Messung \textit{(Abb. \ref{fig:measure1})} ab.
@@ -221,6 +227,18 @@ Daher weicht der Wertebereich in der Ausgangskennlinie der Simulation \textit{(A
         linestyle="--",
         color='blue'
     )
+
+    f += line(
+        [(100, 4), (100, 3.9)],
+        linestyle=":",
+        color="red"
+    )
+
+    f += line(
+        [(200, 4), (200, 3.9)],
+        linestyle=":",
+        color="red"
+    )
 \end{sagesilent}
 
 \begin{figure}[H]
@@ -237,8 +255,6 @@ Die Schwankungen der Ausgangsspannung $U_{a}$ im Bereich von $100\Omega \to 200\
 Die Schaltung liefert ab dem ermittelten minimalen Lastwiederstand $R_{L_{min}}$ eine annähernd konstante und stabile Ausgangsspannung $U_{a}$ mit Abweichungen von wenigen Millivolt.
 Bei größeren Lastwiederständen verhält sich die Ausgangsspannung etwas stabiler.
 Da die Schaltung jedoch keine Rückkopplung besitzt, ist sie sehr anfällig für Störgrößen.
-
-\clearpage
 
 \subsection{Verwendete Geräte}
 
@@ -298,7 +314,7 @@ Schaltungsspezifische Angaben: $U_{e0} = \var{U_e0}V$, $U_{a} = \var{U_a}V$
         to[R=$R_{V}$,*-*] ++(0,-2) coordinate(aux2)
         to[zD=$ZD$,name=ZD,i>^,invert,*-*] (aux2 |- in-)
 
-        (aux2) -- ++(2,0) node[op amp,noinv input up,anchor=+](OPV){OPV}
+        (aux2) -- ++(2,0) node[op amp,noinv input up,anchor=+](OPV){$OPV$}
         (OPV.-) -- ++(0,-1) coordinate(opv-aux1)
         
         (aux1) -- ++(4,0) node[npn,rotate=90,anchor=C](T){\rotatebox{-90}{$T$}}
@@ -340,6 +356,8 @@ Die Eingangsspannung $U_{e0}$ fällt somit an der Z-Diode $ZD$ sowie am Vorwider
     U_{R_{V}} &= \var{U_R_V}V
 \end{align*}
 
+\pagebreak
+
 Nach dem Ohmschen Gesetz ergibt sich somit der Vorwiderstand $R_{V}$:
 
 \begin{sagesilent}
@@ -354,7 +372,8 @@ Nach dem Ohmschen Gesetz ergibt sich somit der Vorwiderstand $R_{V}$:
 
 \subsubsection{Widerstände $R_{1}$ und $R_{2}$ der Sollwerteinstellung}
 
-Um den Sollwert der Ausgangsspannung $U_{a}$ zu beeinflussen, werden die beiden Widerstände $R_{1}$ und $R_{2}$ benötigt. \\
+Um den Sollwert der Ausgangsspannung $U_{a}$ zu beeinflussen, werden die beiden Widerstände $R_{1}$ und $R_{2}$ benötigt.
+Ohne dieser Sollwerteinstellung würde am Ausgang die Referenzspannung anliegen. \\
 
 Nach dem Kirchhoffschen Gesetz ergeben sich folgende Machenregeln und somit auch die Spannungsabfälle der Widerstände:
 
@@ -397,7 +416,9 @@ Mit diesen Werten kann schließlich das Widerstands-Verhältnis der beiden Wider
     \frac{R_{1}}{R_{2}} &\sim \frac{\var{R_1}\Omega}{\var{R_2}\Omega}
 \end{align*}
 
-Die tatsächlichen Widerstandswerte wurden unter Berücksichtigung des erforderlichen Widerstandsverhältnis frei angenommen.
+Die tatsächlichen Widerstandswerte wurden unter Berücksichtigung des erforderlichen Widerstandsverhältnis frei angenommen.\\
+
+Für ein vorhersehbareres Schaltungsverhalten sollten die Widerstandswerte jedoch über einen gewählten maximal fließenden Strom berechnet werden.
 
 \subsubsection{Minimaler Lastwiderstand $R_{L_{min}}$}
 
@@ -484,7 +505,7 @@ Daher weicht der Wertebereich in der Ausgangskennlinie der Simulation \textit{(A
 
 \subsubsection{Bemerkung}
 
-Die Schaltung liefert ab dem ermittelten minimalen Lastwiederstand $R_{L_{min}}$ eine komplett konstante und stabile Ausgangsspannung $U_{a}$ ohne Abweichungen.
+Die Schaltung liefert ab dem ermittelten minimalen Lastwiederstand $R_{L_{min}}$ eine komplett konstante und stabile Ausgangsspannung $U_{a}$ ohne erkennbare Abweichungen.
 
 Da die Schaltung eine Rückkopplung besitzt, kann die Ausgangsspannung \textit{(im Gegensatz zur Spannungsstabilisierung mit Kollektorschaltung)} trotz möglicher Störgrößen stabil geregelt werden.
 
