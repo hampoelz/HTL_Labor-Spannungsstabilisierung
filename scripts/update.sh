@@ -27,7 +27,7 @@ tplver_file=".git/tplver"
 currbr_file=".git/currbr"
 
 # commits ignored by cherry-pick (seperate with space)
-ignore_SHAs="ecb34d6"
+ignore_SHAs="ecb34d6 ec879ac"
 
 
 hookmgr_path="scripts/hookmgr.sh"
@@ -56,7 +56,7 @@ function pull_script()
     
     script_path="$(realpath $1)"
     if [ "$(realpath $0)" == "$script_path" ]; then return 0; fi
-    if [ -d "$script_path" ]; then
+    if [ -d "$(dirname "$script_path")" ]; then
         echo Pull latest update script ...
         curl -sL "$script_url" -o "$script_path"
         bash "$script_path" $2
@@ -298,7 +298,7 @@ function start()
 
 check_git
 check_internet
-if [ "$1" != "--check" ]; then pull_script "$script_path" "$1"; fi
+pull_script "$script_path" "$1"
 
 check_git_version
 
