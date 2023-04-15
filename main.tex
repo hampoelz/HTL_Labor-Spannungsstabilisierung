@@ -228,10 +228,9 @@ Daher weicht der Wertebereich in der Ausgangskennlinie der Simulation \textit{(A
 \begin{sagesilent}
     f = list_plot(
         measures.plot_data(index_RL, index_Ua),
-        color='purple',
-        figsize=[5,2],
         axes_labels=['$R_L$ in $\Omega$', '$U_a$ in V'],
-        axes_labels_size=1
+        figsize=[5.5,2],
+        color='purple'
     )
 
     f += line(
@@ -507,11 +506,10 @@ Daher weicht der Wertebereich in der Ausgangskennlinie der Simulation \textit{(A
 \begin{sagesilent}
     f = list_plot(
         measures.plot_data(index_RL, index_Ua),
-        color='purple',
-        figsize=[5,2],
-        ticks=[100,0.4],
         axes_labels=['$R_L$ in $\Omega$', '$U_a$ in V'],
-        axes_labels_size=1
+        figsize=[5.5,2],
+        ticks=[100,0.4],
+        color='purple'
     )
 
     f += line(
