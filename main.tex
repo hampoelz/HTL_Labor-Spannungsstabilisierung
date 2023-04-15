@@ -35,9 +35,9 @@ Mit Simulationen sollen die Funktionsweisen der Schaltungen überprüft werden.
     U_O_OPV = 13.8
 \end{sagesilent}
 
-Allgemeine Angaben: $I_{a_{max}} = \var{I_a_max}A$, $I_{ZD} = \var{I_ZD}A$
+Allgemeine Angaben: $I_{a_{max}} = \SIvar{I_a_max}{\ampere}$, $I_{ZD} = \SIvar{I_ZD}{\ampere}$
 
-Datenblatt: $U_{ZD} = \var{U_ZD}V$, $U_{ZD} = \var{U_ZD}V$, $U_{ZD_{max}} = \var{U_ZD_max}V$, $U_{BE} = \var{U_BE}V$, $U_{O_{OPV}} = \var{U_O_OPV}V$
+Datenblatt: $U_{ZD} = \SIvar{U_ZD}{\volt}$, $U_{ZD} = \SIvar{U_ZD}{\volt}$, $U_{ZD_{max}} = \SIvar{U_ZD_max}{\volt}$, $U_{BE} = \SIvar{U_BE}{\volt}$, $U_{O_{OPV}} = \SIvar{U_O_OPV}{\volt}$
 
 \vspace{1cm}
 
@@ -54,7 +54,7 @@ Dies führt dazu, dass die Ausgangsspannung bei Laständerungen konstant bleibt.
     U_e0 = 10
 \end{sagesilent}
 
-Schaltungsspezifische Angaben: $U_{e0} = \var{U_e0}V$
+Schaltungsspezifische Angaben: $U_{e0} = \SIvar{U_e0}{\volt}$
 
 \subsection{Schaltung}
 
@@ -105,7 +105,7 @@ Die Eingangsspannung $U_{e0}$ fällt somit an der Z-Diode $ZD$ sowie am Vorwider
 \begin{align*}
     U_{R_{V}} &= U_{e0} - U_{ZD} \\
     U_{R_{V}} &= \var{U_e0} - \var{U_ZD} \\
-    U_{R_{V}} &= \var{U_R_V}V
+    U_{R_{V}} &= \SIvar{U_R_V}{\volt}
 \end{align*}
 
 \pagebreak
@@ -126,7 +126,7 @@ Nach dem Ohmschen Gesetz ergibt sich somit der Vorwiderstand $R_{V}$:
 \begin{align*}
     R_{V} &= \frac{U_{R_{V}}}{I_{ZD}} \\
     R_{V} &= \frac{\var{U_R_V}}{\var{I_ZD}} \\
-    R_{V} &= \var{R_V}\Omega
+    R_{V} &= \SIvar{R_V}{\ohm}
 \end{align*}
 
 \subsubsection{Minimaler Lastwiderstand $R_{L_{min}}$}
@@ -141,7 +141,7 @@ Daraus ergibt sich für die maximale Lastspannung $U_{a_{max}}$:
 \begin{align*}
     U_{a_{max}} &= U_{ZD_{max}} - U_{BE} \\
     U_{a_{max}} &= \var{U_ZD_max} - \var{U_BE} \\
-    U_{a_{max}} &= \var{U_a_max}V
+    U_{a_{max}} &= \SIvar{U_a_max}{\volt}
 \end{align*}
 
 Nach dem Ohmschen Gesetz ergibt sich schließlich der minimale Lastwiderstand $R_{L_{min}}$:
@@ -153,7 +153,7 @@ Nach dem Ohmschen Gesetz ergibt sich schließlich der minimale Lastwiderstand $R
 \begin{align*}
     R_{L_{min}} = \frac{U_{a_{max}}}{I_{a_{max}}} \\
     R_{L_{min}} = \frac{\var{U_a_max}}{\var{I_a_max}} \\
-    R_{L_{min}} = \var{R_L_min}\Omega
+    R_{L_{min}} = \SIvar{R_L_min}{\ohm}
 \end{align*}
 
 \subsection{Simulation}
@@ -176,8 +176,8 @@ Daher weicht der Wertebereich in der Ausgangskennlinie der Simulation \textit{(A
     measures = Measures(
         [
             '$R_L$ in $\Omega$',
-            '$U_a$ in $V$', 
-            '$I_a$ in $mA$'
+            '$U_a$ in V', 
+            '$I_a$ in mA'
         ], [
             ['100', '3.96', '38.2'],
             ['120', '3.96', '32.0'],
@@ -196,7 +196,7 @@ Daher weicht der Wertebereich in der Ausgangskennlinie der Simulation \textit{(A
             ['800', '4.23', '5.30'],
             ['1000', '4.29', '4.30'],
             ['2000', '4.30', '2.16'],
-    ])
+        ], ndigits=[0, 2, 1])
 
     index_RL = 0
     index_Ua = 1
@@ -207,7 +207,7 @@ Daher weicht der Wertebereich in der Ausgangskennlinie der Simulation \textit{(A
 
 \begin{center}
     \renewcommand{\arraystretch}{1.2}
-    \sage{measures.table}
+    \var{measures.table}
 \end{center}
 
 \subsubsection{Grafische Darstellung}
@@ -217,7 +217,7 @@ Daher weicht der Wertebereich in der Ausgangskennlinie der Simulation \textit{(A
         measures.plot_data(index_RL, index_Ua),
         color='purple',
         figsize=[5,2],
-        axes_labels=['$R_L$ in $\Omega$', '$U_a$ in $V$'],
+        axes_labels=['$R_L$ in $\Omega$', '$U_a$ in V'],
         axes_labels_size=1
     )
 
@@ -247,7 +247,7 @@ Daher weicht der Wertebereich in der Ausgangskennlinie der Simulation \textit{(A
     \label{fig:measure1}
 \end{figure}
 
-Die Schwankungen der Ausgangsspannung $U_{a}$ im Bereich von $100\Omega \to 200\Omega$ in der Ausgangskennlinie mit gemessenen Werte \textit{(Abb. \ref{fig:measure1})} sind auf mögliche Störgrößen, wie Änderungen der Eingangsspannung oder Erwärmung der Bauteile, zurückzuführen.
+Die Schwankungen der Ausgangsspannung $U_{a}$ im Bereich von $\qty{100}{\ohm} \to \qty{200}{\ohm}$ in der Ausgangskennlinie mit gemessenen Werte \textit{(Abb. \ref{fig:measure1})} sind auf mögliche Störgrößen, wie Änderungen der Eingangsspannung oder Erwärmung der Bauteile, zurückzuführen.
 
 \subsubsection{Bemerkung}
 
@@ -298,7 +298,7 @@ Die Ausgangsspannung $U_{a}$ kann auf einen beliebigen Wert zwischen der Zener-S
     U_a = 7
 \end{sagesilent}
 
-Schaltungsspezifische Angaben: $U_{e0} = \var{U_e0}V$, $U_{a} = \var{U_a}V$
+Schaltungsspezifische Angaben: $U_{e0} = \SIvar{U_e0}{\volt}$, $U_{a} = \SIvar{U_a}{\volt}$
 
 \subsection{Schaltung}
 
@@ -313,7 +313,7 @@ Schaltungsspezifische Angaben: $U_{e0} = \var{U_e0}V$, $U_{a} = \var{U_a}V$
         to[R=$R_{V}$,*-*] ++(0,-2) coordinate(aux2)
         to[zD=$ZD$,name=ZD,i>^,invert,*-*] (aux2 |- in-)
 
-        (aux2) -- ++(2,0) node[op amp,noinv input up,anchor=+](OPV){$OPV$}
+        (aux2) -- ++(2,0) node[op amp,noinv input up,anchor=+](OPV){OPV}
         (OPV.-) -- ++(0,-1) coordinate(opv-aux1)
         
         (aux1) -- ++(4,0) node[npn,rotate=90,anchor=C](T){\rotatebox{-90}{$T$}}
@@ -352,7 +352,7 @@ Die Eingangsspannung $U_{e0}$ fällt somit an der Z-Diode $ZD$ sowie am Vorwider
 \begin{align*}
     U_{R_{V}} &= U_{e0} - U_{ZD} \\
     U_{R_{V}} &= \var{U_e0} - \var{U_ZD} \\
-    U_{R_{V}} &= \var{U_R_V}V
+    U_{R_{V}} &= \SIvar{U_R_V}{\volt}
 \end{align*}
 
 \pagebreak
@@ -366,7 +366,7 @@ Nach dem Ohmschen Gesetz ergibt sich somit der Vorwiderstand $R_{V}$:
 \begin{align*}
     R_{V} &= \frac{U_{R_{V}}}{I_{ZD}} \\
     R_{V} &= \frac{\var{U_R_V}}{\var{I_ZD}} \\
-    R_{V} &= \var{R_V}\Omega
+    R_{V} &= \SIvar{R_V}{\ohm}
 \end{align*}
 
 \subsubsection{Widerstände $R_{1}$ und $R_{2}$ der Sollwerteinstellung}
@@ -385,14 +385,14 @@ Nach dem Kirchhoffschen Gesetz ergeben sich folgende Machenregeln und somit auch
     U_{O_{OPV}} &= U_{BE} + U_{R_{1_{(max)}}} \\
     U_{R_{1_{(max)}}} &= U_{O_{OPV}} - U_{BE} \\
     U_{R_{1_{(max)}}} &= \var{U_O_OPV} - \var{U_BE} \\
-    U_{R_{1_{(max)}}} &= \var{U_R_1_max}V
+    U_{R_{1_{(max)}}} &= \SIvar{U_R_1_max}{\volt}
 \end{align*}
 
 \begin{align*}
     U_{a} &= U_{R_{1_{(max)}}} + U_{R_{2_{(max)}}} \\
     U_{R_{2_{(max)}}} &= U_{a} - U_{R_{1_{(max)}}} \\
     U_{R_{2_{(max)}}} &= \var{U_a} - \var{U_R_1_max} \\
-    U_{R_{2_{(max)}}} &= \var{U_R_2_max}V
+    U_{R_{2_{(max)}}} &= \SIvar{U_R_2_max}{\volt}
 \end{align*}
 
 \begin{sagesilent}
@@ -412,7 +412,7 @@ Mit diesen Werten kann schließlich das Widerstands-Verhältnis der beiden Wider
     \frac{R_{1}}{R_{2}} &\sim - \frac{U_{R_{1_{(max)}}}}{\abs{U_{R_{2_{(max)}}}}} \\
     \frac{R_{1}}{R_{2}} &\sim \frac{\abs{U_{R_{2_{(max)}}}}}{U_{R_{1_{(max)}}}} \\
     \frac{R_{1}}{R_{2}} &\sim \frac{\var{abs(U_R_2_max)}}{\var{U_R_1_max}} \\
-    \frac{R_{1}}{R_{2}} &\sim \frac{\var{R_1}\Omega}{\var{R_2}\Omega}
+    \frac{R_{1}}{R_{2}} &\sim \frac{\SIvar{R_1}{\ohm}}{\SIvar{R_2}{\ohm}}
 \end{align*}
 
 Die tatsächlichen Widerstandswerte wurden unter Berücksichtigung des erforderlichen Widerstandsverhältnis frei angenommen.\\
@@ -430,7 +430,7 @@ Der minimale Lastwiderstand $R_{L_{min}}$ wird schließlich durch das Ohmsche Ge
 \begin{align*}
     R_{L_{min}} &= \frac{U_{a}}{I_{a_{max}}} \\
     R_{L_{min}} &= \frac{\var{U_a}}{\var{I_a_max}} \\
-    R_{L_{min}} &= \var{R_L_min}\Omega
+    R_{L_{min}} &= \SIvar{R_L_min}{\ohm}
 \end{align*}
 
 \subsection{Simulation}
@@ -453,8 +453,8 @@ Daher weicht der Wertebereich in der Ausgangskennlinie der Simulation \textit{(A
     measures = Measures(
         [
             '$R_L$ in $\Omega$',
-            '$U_a$ in $V$', 
-            '$I_a$ in $mA$'
+            '$U_a$ in V', 
+            '$I_a$ in mA'
         ], [
             ['140', '6.8', '47'],
             ['160', '6.8', '41'],
@@ -464,7 +464,7 @@ Daher weicht der Wertebereich in der Ausgangskennlinie der Simulation \textit{(A
             ['400', '6.8', '17'],
             ['500', '6.8', '13'],
             ['1000', '6.8', '7'],
-    ])
+    ], ndigits=[0, 1, 0])
 
     index_RL = 0
     index_Ua = 1
@@ -473,7 +473,7 @@ Daher weicht der Wertebereich in der Ausgangskennlinie der Simulation \textit{(A
 
 \begin{center}
     \renewcommand{\arraystretch}{1.2}
-    \sage{measures.table}
+    \var{measures.table}
 \end{center}
 
 \subsubsection{Grafische Darstellung}
@@ -484,7 +484,7 @@ Daher weicht der Wertebereich in der Ausgangskennlinie der Simulation \textit{(A
         color='purple',
         figsize=[5,2],
         ticks=[100,0.4],
-        axes_labels=['$R_L$ in $\Omega$', '$U_a$ in $V$'],
+        axes_labels=['$R_L$ in $\Omega$', '$U_a$ in V'],
         axes_labels_size=1
     )
 
