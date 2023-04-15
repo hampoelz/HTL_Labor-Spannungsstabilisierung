@@ -158,9 +158,22 @@ Nach dem Ohmschen Gesetz ergibt sich schließlich der minimale Lastwiderstand $R
 
 \subsection{Simulation}
 
+\begin{sagesilent}
+    simulation1_data = LTSpice.plot_data("src/simulations/export/01 Spannungs-Stabilisierung_Kollektor.txt")
+    simulation1_data_Vout = simulation1_data["V(out)"]
+
+    simulation1_plot = list_plot(
+        simulation1_data_Vout,
+        axes_labels=['$R_L$ in $\Omega$', '$U_a$ in V'],
+        figsize=[5.5,2],
+        plotjoined=True,
+        frame=True
+    )
+\end{sagesilent}
+
 \begin{figure}[H]
     \centering
-    \includesvg[width=\textwidth]{images/01 Spannungs-Stabilisierung_Kollektor.svg}
+    \sageplot{simulation1_plot}
     \caption{Ausgangskennlinie \textbf{$U_{a} = f(R_L)$} der Simulation}
     \label{fig:simulation1}
 \end{figure}
@@ -435,9 +448,22 @@ Der minimale Lastwiderstand $R_{L_{min}}$ wird schließlich durch das Ohmsche Ge
 
 \subsection{Simulation}
 
+\begin{sagesilent}
+    simulation2_data = LTSpice.plot_data("src/simulations/export/02 Spannungs-Stabilisierung_OPV.txt")
+    simulation2_data_Vout = simulation2_data["V(out)"]
+
+    simulation2_plot = list_plot(
+        simulation2_data_Vout,
+        axes_labels=['$R_L$ in $\Omega$', '$U_a$ in V'],
+        figsize=[5.5,2],
+        plotjoined=True,
+        frame=True
+    )
+\end{sagesilent}
+
 \begin{figure}[H]
     \centering
-    \includesvg[width=\textwidth]{images/02 Spannungs-Stabilisierung_OPV.svg}
+    \sageplot{simulation2_plot}
     \caption{Ausgangskennlinie \textbf{$U_{a} = f(R_L)$} der Simulation}
     \label{fig:simulation2}
 \end{figure}
